@@ -19,18 +19,21 @@ define pipeVol 700
 define gasConst 8.314
 define O2MolConst 501
 define toCel 273
-#define extraVol .16666
 
 #Mols needed for Smelt
-define premixO2Mol 1
+define premixO2Mol 1 #will use this to bring in ores and 'preload' the system
+#Alloys
 define steelO2Mol 19
 define electrumO2Mol 14
 define invarO2Mol 125
 define constantanO2Mol 68
 define solderO2Mol 18
+
+#Super Alloys
 define astroloyO2Mol 200
 define inconelO2Mol 200
 define waspaloyO2Mol 300
+#Need to add in hastelloy
 define stelliteO2Mol 125
 
 define steel -654790771
@@ -46,7 +49,6 @@ define stellite -1897868623
 
 main:
 l r10 furnMastIC Setting
-#l r10 dialSel Setting
 beq r10 -654790771 steelMol
 beq r10 502280180 electrumMol
 beq r10 -297990285 invarMol
@@ -110,8 +112,6 @@ s O2PR Setting r1
 mul r4 selMol gasConst
 mul r4 r4 O2TEMP
 div r4 r4 pipeVol
-#mul r5 r4 extraVol
-#add r4 r4 r5
 sub r4 r1 r4
 s O2BPR Setting r4
 
