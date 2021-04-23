@@ -31,7 +31,7 @@ define solderH2Mol 72
 define astroloyH2Mol 500
 define inconelH2Mol 500
 define waspaloyH2Mol 800
-#Need to add in hastelloy
+define hatelloyH2Mol 300
 define stelliteH2Mol 250
 
 #hash numbers for all of the alloys made in furnace
@@ -56,6 +56,7 @@ beq r10 -82508479 solderMol
 beq r10 412924554 astroloyMol
 beq r10 -787796599 inconelMol
 beq r10 156348098 waspaloyMol
+beq r10  1579842814 hastelloyMol
 beq r10 -1897868623 stelliteMol
 
 steelMol:
@@ -88,6 +89,10 @@ j H2Set
 
 waspaloyMol:
 move selMol waspaloyH2Mol
+j H2Set
+
+hastelloyMol:
+move selMol hastelloyH2Mol
 j H2Set
 
 stelliteMol:

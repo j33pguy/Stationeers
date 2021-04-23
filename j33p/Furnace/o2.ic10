@@ -31,7 +31,7 @@ define solderO2Mol 18
 define astroloyO2Mol 200
 define inconelO2Mol 200
 define waspaloyO2Mol 300
-#Need to add in hastelloy
+define hastelloyO2Mol 100
 define stelliteO2Mol 125
 
 #hash numbers for all of the alloys made in furnac
@@ -56,43 +56,48 @@ beq r10 -82508479 solderMol
 beq r10 412924554 astroloyMol
 beq r10 -787796599 inconelMol
 beq r10 156348098 waspaloyMol
+beq r10  1579842814 hastelloyMol
 beq r10 -1897868623 stelliteMol
 
 steelMol:
 move selMol steelO2Mol
-j o2Set
+j O2Set
 
 electrumMol:
 move selMol electrumO2Mol
-j o2Set
+j O2Set
 
 invarMol:
 move selMol invarO2Mol
-j o2Set
+j O2Set
 
 constantanMol:
 move selMol constantanO2Mol
-j o2Set
+j O2Set
 
 solderMol:
 move selMol solderO2Mol
-j o2Set
+j O2Set
 
 astroloyMol:
 move selMol astroloyO2Mol
-j o2Set
+j O2Set
 
 inconelMol:
 move selMol inconelO2Mol
-j o2Set
+j O2Set
 
 waspaloyMol:
 move selMol waspaloyO2Mol
-j o2Set
+j O2Set
+
+hastelloyMol:
+move selMol hastelloyO2Mol
+j O2Set
 
 stelliteMol:
 move selMol stelliteO2Mol
-j o2Set
+j O2Set
 
 #based on alloy select, use ideal gas law (PV=nRT to figure out moles needed)
 o2Set:
