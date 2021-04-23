@@ -1,0 +1,112 @@
+alias H2PR d0
+alias H2DPA d1
+alias H2BPR d2
+alias furnMastIC d4
+alias furnConf d5
+
+alias selMol r11
+alias H2N r12
+alias H2PRESS r13
+alias H2TEMP r14
+alias H2MOLES r15
+
+define pipeVol 700
+define gasConst 8.314
+define H2MolConst 1001
+define toCel 273
+#define extraVol .16666
+
+#Moles of H2 requested for smelt
+define steelH2Mol 44
+define electrumH2Mol 29
+define invarH2Mol 350
+define constantanH2Mol 17
+define solderH2Mol 72
+define astroloyH2Mol 500
+define inconelH2Mol 500
+
+define waspaloyH2Mol 800
+define stelliteH2Mol 250
+
+define steel -654790771
+define electrum 502280180
+define invar -297990285
+define constantan 1058547521
+define solder -82508479
+define astroloy 412924554
+define inconel -787796599
+define waspaloy 156348098
+define hastelloy 1579842814
+define stellite -1897868623
+
+main:
+l r10 furnMastIC Setting
+#l r10 dialSel Setting
+beq r10 -654790771 steelMol
+beq r10 502280180 electrumMol
+beq r10 -297990285 invarMol
+beq r10 1058547521 constantanMol
+beq r10 -82508479 solderMol
+beq r10 412924554 astroloyMol
+beq r10 -787796599 inconelMol
+beq r10 156348098 waspaloyMol
+beq r10 -1897868623 stelliteMol
+
+steelMol:
+move selMol steelH2Mol
+j H2Set
+
+electrumMol:
+move selMol electrumH2Mol
+j H2Set
+
+invarMol:
+move selMol invarH2Mol
+j H2Set
+
+constantanMol:
+move selMol constantanH2Mol
+j H2Set
+
+solderMol:
+move selMol solderH2Mol
+j H2Set
+
+astroloyMol:
+move selMol astroloyH2Mol
+j H2Set
+
+inconelMol:
+move selMol inconelH2Mol
+j H2Set
+
+waspaloyMol:
+move selMol waspaloyH2Mol
+j H2Set
+
+stelliteMol:
+move selMol stelliteH2Mol
+j H2Set
+
+H2Set:
+l r2 furnConf Setting
+seqz r3 r2
+s H2PR On r3
+s H2BPR On r2
+s db Setting selMol
+l H2MOLES H2DPA TotalMoles
+l H2TEMP H2DPA Temperature
+l H2PRESS H2DPA Pressure
+mul r1 H2MolConst gasConst
+mul r1 r1 H2TEMP
+div r1 r1 pipeVol
+mul r4 selMol gasConst
+mul r4 r4 H2TEMP
+div r4 r4 pipeVol
+#mul r5 r4 extraVol
+#add r4 r4 r5
+sub r4 r1 r4
+s H2PR Setting r1
+s H2BPR Setting r4
+
+j main
