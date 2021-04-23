@@ -5,19 +5,17 @@
 alias O2PR d0
 alias O2DPA d1
 alias O2BPR d2
-alias dialSel d3
 alias furnMastIC d4
-alias furnConf d5
+alias lever d5
 
-alias selMol r11
-alias O2N r12
+alias selMol r12
 alias O2PRESS r13
 alias O2TEMP r14
 alias O2MOLES r15
 
 define pipeVol 700
 define gasConst 8.314
-define O2MolConst 501
+define O2MolConst 500 #Number of Mols to keep in 'reserve' in storage pipe
 define toCel 273
 
 #Mols needed for Smelt
@@ -33,9 +31,10 @@ define solderO2Mol 18
 define astroloyO2Mol 200
 define inconelO2Mol 200
 define waspaloyO2Mol 300
-#Need to add in hastelloy
+define hastelloyO2Mol 100
 define stelliteO2Mol 125
 
+#hash numbers for all of the alloys made in furnac
 define steel -654790771
 define electrum 502280180
 define invar -297990285
@@ -57,45 +56,50 @@ beq r10 -82508479 solderMol
 beq r10 412924554 astroloyMol
 beq r10 -787796599 inconelMol
 beq r10 156348098 waspaloyMol
+beq r10  1579842814 hastelloyMol
 beq r10 -1897868623 stelliteMol
 
 steelMol:
 move selMol steelO2Mol
-j o2Set
+j O2Set
 
 electrumMol:
 move selMol electrumO2Mol
-j o2Set
+j O2Set
 
 invarMol:
 move selMol invarO2Mol
-j o2Set
+j O2Set
 
 constantanMol:
 move selMol constantanO2Mol
-j o2Set
+j O2Set
 
 solderMol:
 move selMol solderO2Mol
-j o2Set
+j O2Set
 
 astroloyMol:
 move selMol astroloyO2Mol
-j o2Set
+j O2Set
 
 inconelMol:
 move selMol inconelO2Mol
-j o2Set
+j O2Set
 
 waspaloyMol:
 move selMol waspaloyO2Mol
-j o2Set
+j O2Set
+
+hastelloyMol:
+move selMol hastelloyO2Mol
+j O2Set
 
 stelliteMol:
 move selMol stelliteO2Mol
-j o2Set
+j O2Set
 
-
+#based on alloy select, use ideal gas law (PV=nRT to figure out moles needed)
 o2Set:
 l r2 furnConf Setting
 seqz r3 r2

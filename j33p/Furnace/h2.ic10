@@ -6,17 +6,16 @@ alias H2PR d0
 alias H2DPA d1
 alias H2BPR d2
 alias furnMastIC d4
-alias furnConf d5
+alias lever d5
 
-alias selMol r11
-alias H2N r12
+alias selMol r12
 alias H2PRESS r13
 alias H2TEMP r14
 alias H2MOLES r15
 
 define pipeVol 700
 define gasConst 8.314
-define H2MolConst 1001
+define H2MolConst 1000 #Number of Mols to keep in 'reserve' in storage pipe
 define toCel 273
 
 #Moles of H2 requested for smelt
@@ -32,7 +31,7 @@ define solderH2Mol 72
 define astroloyH2Mol 500
 define inconelH2Mol 500
 define waspaloyH2Mol 800
-#Need to add in hastelloy
+define hatelloyH2Mol 300
 define stelliteH2Mol 250
 
 #hash numbers for all of the alloys made in furnace
@@ -57,6 +56,7 @@ beq r10 -82508479 solderMol
 beq r10 412924554 astroloyMol
 beq r10 -787796599 inconelMol
 beq r10 156348098 waspaloyMol
+beq r10  1579842814 hastelloyMol
 beq r10 -1897868623 stelliteMol
 
 steelMol:
@@ -91,10 +91,15 @@ waspaloyMol:
 move selMol waspaloyH2Mol
 j H2Set
 
+hastelloyMol:
+move selMol hastelloyH2Mol
+j H2Set
+
 stelliteMol:
 move selMol stelliteH2Mol
 j H2Set
 
+#based on alloy select, use ideal gas law (PV=nRT to figure out moles needed)
 H2Set:
 l r2 furnConf Setting
 seqz r3 r2
