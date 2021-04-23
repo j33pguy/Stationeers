@@ -14,20 +14,23 @@ define pipeVol 700
 define gasConst 8.314
 define H2MolConst 1001
 define toCel 273
-#define extraVol .16666
 
 #Moles of H2 requested for smelt
+#Alloys
 define steelH2Mol 44
 define electrumH2Mol 29
 define invarH2Mol 350
 define constantanH2Mol 17
 define solderH2Mol 72
+
+#Super Alloys
 define astroloyH2Mol 500
 define inconelH2Mol 500
-
 define waspaloyH2Mol 800
+#Need to add in hastelloy
 define stelliteH2Mol 250
 
+#hash numbers for all of the alloys made in furnace
 define steel -654790771
 define electrum 502280180
 define invar -297990285
@@ -41,7 +44,6 @@ define stellite -1897868623
 
 main:
 l r10 furnMastIC Setting
-#l r10 dialSel Setting
 beq r10 -654790771 steelMol
 beq r10 502280180 electrumMol
 beq r10 -297990285 invarMol
@@ -103,8 +105,6 @@ div r1 r1 pipeVol
 mul r4 selMol gasConst
 mul r4 r4 H2TEMP
 div r4 r4 pipeVol
-#mul r5 r4 extraVol
-#add r4 r4 r5
 sub r4 r1 r4
 s H2PR Setting r1
 s H2BPR Setting r4
