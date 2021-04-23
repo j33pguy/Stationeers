@@ -20,6 +20,7 @@ define H2MolConst 1001
 define toCel 273
 
 #Moles of H2 requested for smelt
+define premixH2Mol 2 #will use this to bring in ores and 'preload' the system
 #Alloys
 define steelH2Mol 44
 define electrumH2Mol 29

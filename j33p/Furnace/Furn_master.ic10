@@ -97,7 +97,7 @@ round r4 furnMoles
 l recHash furnace RecipeHash
 seq furnAct r1 r4
 #s db Setting r1
-s vendIC Setting selHash
+s vendIC Setting selHash #write select Alloy to the vend IC, which in turn allows to be written here, this allows for queue
 s furnace Activate furnAct
 seq furnOpen selHash recHash
 s furnace Open furnOpen
