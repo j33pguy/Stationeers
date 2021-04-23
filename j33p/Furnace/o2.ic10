@@ -100,8 +100,8 @@ move selMol stelliteO2Mol
 j O2Set
 
 #based on alloy select, use ideal gas law (PV=nRT to figure out moles needed)
-o2Set:
-l r2 furnConf Setting
+O2Set:
+l r2 lever Setting
 seqz r3 r2
 s O2PR On r3
 s O2BPR On r2

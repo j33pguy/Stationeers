@@ -101,7 +101,7 @@ j H2Set
 
 #based on alloy select, use ideal gas law (PV=nRT to figure out moles needed)
 H2Set:
-l r2 furnConf Setting
+l r2 lever Setting
 seqz r3 r2
 s H2PR On r3
 s H2BPR On r2

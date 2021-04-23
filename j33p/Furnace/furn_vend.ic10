@@ -1,0 +1,53 @@
+#j33psguy's advanced furnace script | Master Script
+#twitch.tv/j33pguy
+#github.com/j33pguy/stationeer
+
+alias furnMaster d0
+alias button d1
+alias hashMem2 d2
+alias hashMem3 d3
+alias hashMem4 d4
+alias hashMem5 d5
+
+alias queue1 r1
+alias queue2 r2
+alias queue3 r3
+alias queue4 r4
+
+alias temp r5
+
+define copper -404336834
+j ClrMem
+
+Main:
+l r0 db Setting
+l r15 button Setting
+s furnMaster Setting r0
+bnez r15 PushStack
+#s hashMem2 Setting r1
+#s hashMem3 Setting r2
+#s hashMem4 Setting r3
+#s hashMem5 Setting r4
+j Main
+
+PushStack:
+select r1 r1 0 r0
+s hashMem2 Setting r1
+move temp r1
+select r2 r2 0 temp
+move temp r2
+s hashMem3 Setting r2
+select r3 temp 0 r2
+s hashMem3 Setting r3
+
+
+j Main
+
+ClrMem:
+move r0 0
+move r1 0
+move r2 0
+move r3 0
+move r4 0
+move temp 0
+j Main
