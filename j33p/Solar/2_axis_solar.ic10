@@ -1,8 +1,10 @@
+#j33pguy's 2 axis solar logic
+#twitch.tv/j33pguy
+
 alias sGen d4
 alias fLight d5
 
 alias angle r0
-#alias running r1
 alias charge r2
 alias empty r3
 alias hAngle r4
