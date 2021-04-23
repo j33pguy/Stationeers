@@ -1,0 +1,67 @@
+alias furnaceIn d0​
+alias furnaceOut d1​
+alias dial d2​
+alias ledTemp d3​
+alias ledPress d4​
+​
+alias tempColor r6​
+alias pressColor r7​
+alias furnAct r8​
+alias inTemp r9​
+alias inPress r10​
+alias dialSet r11​
+alias minPress r12​
+alias maxPress r13​
+alias minTemp r14​
+alias maxTemp r15​
+​
+main:​
+dialSelect:​
+l dialSet dial Setting​
+breq dialSet 0 5​
+breq dialSet 1 9​
+breq dialSet 2 13​
+breq dialSet 3 17​
+breq dialSet 4 21​
+move minPress 100  #STEEL SET​
+move maxPress 100000​
+move minTemp 600​
+move maxTemp 100000​
+j pressTempComp​
+move minPress 800  #ELECTRUM SET​
+move maxPress 2400​
+move minTemp 700​
+move maxTemp 10000​
+j pressTempComp​
+move minPress 6000  #INVAR SET​
+move maxPress 7000​
+move minTemp 1200​
+move maxTemp 2000​
+j pressTempComp​
+move minPress 100  #CONSTANTAN SET​
+move maxPress 10000​
+move minTemp 1000​
+move maxTemp 1500​
+j pressTempComp​
+move minPress 300  #SOLDER SET​
+move maxPress 3500​
+move minTemp 300​
+move maxTemp 2000​
+j pressTempComp​
+​
+pressTempComp:​
+l r0 furnaceIn Temperature​
+l r1 furnaceIn Pressure​
+sgt r2 r1 minPress​
+slt r3 r1 maxPress​
+and inPress r2 r3​
+sgt r4 r0 minTemp​
+slt r5 r0 maxTemp​
+and inTemp r4 r5​
+s ledPress Color 4​
+s ledTemp Color 4​
+and furnAct inTemp inPress​
+s furnaceOut Activate furnAct​
+j dialSelect​
+​
+j main
