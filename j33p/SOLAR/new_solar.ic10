@@ -1,0 +1,51 @@
+alias sGen d4
+alias fLight d5
+
+alias angle r0
+#alias running r1
+alias charge r2
+alias empty r3
+alias hAngle r4
+alias vAngle r5
+
+define heavySolar -1545574413
+define largeBatt -1388288459
+
+s fLight On 0
+
+Main:
+#Sun up check
+l hAngle sen Horizontal
+j WriteVert
+
+CheckCharge:
+#Check to make sure battries have charge
+#If below threshold, turn on gen
+lb charge largeBatt Ratio 0
+mul charge charge 100
+trunc charge charge
+s db Setting charge
+sle r15 charge 40
+sle r14 charge 95
+select r14 r15 r15 r14
+s sGen On r14
+j GenEmpty
+
+GenEmpty:
+#If gen is empty...turn on flashing light
+ls empty sGen 0 Occupied
+seq empty empty 0
+s fLight On empty
+j Main
+
+WriteVert:
+l vAngle sen Vertical
+div vAngle vAngle 1.5
+sub vAngle 50 vAngle
+sb heavySolar Vertical vAngle
+j WriteHor
+
+WriteHor:
+l hAngle sen Horizontal
+sb heavySolar Horizontal hAngle
+j CheckCharge<
