@@ -1,0 +1,118 @@
+#j33psguy's advanced furnace script | O2
+#twitch.tv/j33pguy
+#github.com/j33pguy/stationeers
+
+alias O2PR d0
+alias O2DPA d1
+alias O2BPR d2
+alias dialSel d3
+alias furnMastIC d4
+alias furnConf d5
+
+alias selMol r11
+alias O2N r12
+alias O2PRESS r13
+alias O2TEMP r14
+alias O2MOLES r15
+
+define pipeVol 700
+define gasConst 8.314
+define O2MolConst 501
+define toCel 273
+#define extraVol .16666
+
+#Mols needed for Smelt
+define premixO2Mol 1
+define steelO2Mol 19
+define electrumO2Mol 14
+define invarO2Mol 125
+define constantanO2Mol 68
+define solderO2Mol 18
+define astroloyO2Mol 200
+define inconelO2Mol 200
+define waspaloyO2Mol 300
+define stelliteO2Mol 125
+
+define steel -654790771
+define electrum 502280180
+define invar -297990285
+define constantan 1058547521
+define solder -82508479
+define astroloy 412924554
+define inconel -787796599
+define waspaloy 156348098
+define hastelloy 1579842814
+define stellite -1897868623
+
+main:
+l r10 furnMastIC Setting
+#l r10 dialSel Setting
+beq r10 -654790771 steelMol
+beq r10 502280180 electrumMol
+beq r10 -297990285 invarMol
+beq r10 1058547521 constantanMol
+beq r10 -82508479 solderMol
+beq r10 412924554 astroloyMol
+beq r10 -787796599 inconelMol
+beq r10 156348098 waspaloyMol
+beq r10 -1897868623 stelliteMol
+
+steelMol:
+move selMol steelO2Mol
+j o2Set
+
+electrumMol:
+move selMol electrumO2Mol
+j o2Set
+
+invarMol:
+move selMol invarO2Mol
+j o2Set
+
+constantanMol:
+move selMol constantanO2Mol
+j o2Set
+
+solderMol:
+move selMol solderO2Mol
+j o2Set
+
+astroloyMol:
+move selMol astroloyO2Mol
+j o2Set
+
+inconelMol:
+move selMol inconelO2Mol
+j o2Set
+
+waspaloyMol:
+move selMol waspaloyO2Mol
+j o2Set
+
+stelliteMol:
+move selMol stelliteO2Mol
+j o2Set
+
+
+o2Set:
+l r2 furnConf Setting
+seqz r3 r2
+s O2PR On r3
+s O2BPR On r2
+s db Setting selMol
+l O2MOLES O2DPA TotalMoles
+l O2TEMP O2DPA Temperature
+l O2PRESS O2DPA Pressure
+mul r1 O2MolConst gasConst
+mul r1 r1 O2TEMP
+div r1 r1 pipeVol
+s O2PR Setting r1
+mul r4 selMol gasConst
+mul r4 r4 O2TEMP
+div r4 r4 pipeVol
+#mul r5 r4 extraVol
+#add r4 r4 r5
+sub r4 r1 r4
+s O2BPR Setting r4
+
+j main

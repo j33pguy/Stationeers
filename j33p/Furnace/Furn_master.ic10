@@ -1,0 +1,111 @@
+#j33psguy's advanced furnace script | Master Script
+#twitch.tv/j33pguy
+#github.com/j33pguy/stationeers
+
+alias furnace d0
+alias dial d1
+alias lever d2
+alias vendIC d3
+alias o2IC d4
+alias h2IC d5
+
+alias furnMoles r7
+alias furnAct r8
+alias recHash r9
+alias leverSet r12
+alias furnOpen r13
+alias selHash r14
+alias dialSet r15
+
+define steel -654790771
+define electrum 502280180
+define invar -297990285
+define constantan 1058547521
+define solder -82508479
+define astroloy 412924554
+define inconel -787796599
+define waspaloy 156348098
+define hastelloy 1579842814
+define stellite -1897868623
+
+#device setup | only runs once
+s dial Mode 9
+
+dialSelect:
+l dialSet dial Setting
+beq dialSet 0 steelSet
+beq dialSet 1 electrumSet
+beq dialSet 2 invarSet
+beq dialSet 3 constantanSet
+beq dialSet 4 solderSet
+beq dialSet 5 astroloySet
+beq dialSet 6 inconelSet
+beq dialSet 7 waspaloySet
+beq dialSet 8 hastelloySet
+beq dialSet 9 stelliteSet
+
+steelSet:
+move selHash steel
+j Main
+
+electrumSet:
+move selHash electrum
+j Main
+
+invarSet:
+move selHash invar
+j Main
+
+constantanSet:
+move selHash constantan
+j Main
+
+solderSet:
+move selHash solder
+j Main
+
+astroloySet:
+move selHash astroloy
+j Main
+
+inconelSet:
+move selHash inconel
+j Main
+
+waspaloySet:
+move selHash waspaloy
+j Main
+
+hastelloySet:
+move selHash hastelloy
+j Main
+
+stelliteSet:
+move selHash stellite
+j Main
+
+Main:
+l r1 o2IC Setting
+l r2 h2IC Setting
+l leverSet lever Setting
+select r5 leverSet 0 100
+s furnace SettingOutput r5
+add r1 r1 r2
+round r1 r1
+l furnMoles furnace TotalMoles
+round r4 furnMoles
+l recHash furnace RecipeHash
+seq furnAct r1 r4
+#s db Setting r1
+s vendIC Setting selHash
+s furnace Activate furnAct
+seq furnOpen selHash recHash
+s furnace Open furnOpen
+beq furnOpen 1 SysReset
+j dialSelect
+
+SysReset:
+s furnace ClearMemory 1
+s furnace SettingOutput 100
+s lever Open 0
+j Main
