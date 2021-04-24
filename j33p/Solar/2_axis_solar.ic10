@@ -2,6 +2,7 @@
 #twitch.tv/j33pguy
 #github.com/j33pguy/Stationeers
 
+alias sen d0
 alias sGen d4
 alias fLight d5
 
@@ -11,8 +12,8 @@ alias empty r3
 alias hAngle r4
 alias vAngle r5
 
-define heavySolar -1545574413
-define largeBatt -1388288459
+define solarPan -1545574413 #Place hash code of your solar panel here
+define batt -1388288459 #Place the hash code of your battery here
 
 s fLight On 0
 
@@ -24,7 +25,7 @@ j WriteVert
 CheckCharge:
 #Check to make sure battries have charge
 #If below threshold, turn on gen
-lb charge largeBatt Ratio 0
+lb charge batt Ratio 0
 mul charge charge 100
 trunc charge charge
 s db Setting charge
@@ -45,10 +46,10 @@ WriteVert:
 l vAngle sen Vertical
 div vAngle vAngle 1.5
 sub vAngle 50 vAngle
-sb heavySolar Vertical vAngle
+sb solarPan Vertical vAngle
 j WriteHor
 
 WriteHor:
 l hAngle sen Horizontal
-sb heavySolar Horizontal hAngle
-j CheckCharge<
+sb solarPan Horizontal hAngle
+j CheckCharge
