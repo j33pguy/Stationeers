@@ -32,6 +32,7 @@ s db Setting charge
 sle r15 charge 40
 sle r14 charge 95
 select r14 r15 r15 r14
+or r14 r15 r14
 s sGen On r14
 j GenEmpty
 

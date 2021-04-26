@@ -28,4 +28,4 @@ DeviceOperation:
 ls r14 dr15 0 Occupied
 s dr15 On r14
 s dr15 Activate r14
-j ran
+j ra
