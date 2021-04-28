@@ -1,6 +1,10 @@
 # Notes for PID Controller
 
+## Links/Sources
+
 [Wiki-Where these notes come from](https://en.wikipedia.org/wiki/PID_controller)
+
+[Medium Article - High Level/No Math/Easy read](https://medium.com/codezillas/pid-controllers-explained-without-maths-551faf251d4f)
 
 ## Variables
 
