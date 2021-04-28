@@ -1,0 +1,31 @@
+alias af1 d0
+alias af2 d1
+#alias af3 d2
+#alias af4 d3
+#alias af5 d4
+#alias af6 d5
+
+## FOR FUTURE REMOVE ALL OTHER DEVICES OTHER THAN AFs
+define afCount 1
+
+alias bDoor d4
+alias pPlate d5
+
+restart:
+move r15 0
+
+loop:
+bdseal dr15 DeviceOperation
+yield
+l r1 pPlate Setting
+s bDoor Open r1
+# d5 was processed, restart
+beq r15 afCount restart
+add r15 r15 1
+j loop
+
+DeviceOperation:
+ls r14 dr15 0 Occupied
+s dr15 On r14
+s dr15 Activate r14
+j ra
