@@ -1,28 +1,40 @@
-#j33psguy's advanced furnace script | Furnace Vending script
+#j33psguy's advanced furnace script | Furnace Vending machine script
 #twitch.tv/j33pguy
 #github.com/j33pguy/stationeer
 
-#alias furnMaster d0
+alias furnMaster d0
 alias button d1
 alias hashMem2 d2
 alias hashMem3 d3
 alias hashMem4 d4
 alias hashMem5 d5
 
-alias tempNum r15
+alias queue1 r1
+alias queue2 r2
+alias queue3 r3
+alias queue4 r4
 
-Restart:
-move r15 1
+j ClrMem #runs once, clears all registers
 
 Main:
-l r0 button Setting 
-beq r0 1 PushStack
-yield
-beq tempNum 5 Restart
+l r0 db Setting
+l r15 button Setting
+s furnMaster Setting r0
+bnez r15 PushStack
 j Main
 
 PushStack:
-push tempNum
-s d2 Setting r15
-add tempNum tempNum 1
-j ra
+push r0
+j Main
+
+PopStack:
+pop r1
+j Main
+
+ClrMem:
+move r0 0
+move r1 0
+move r2 0
+move r3 0
+move r4 0
+j Maina
