@@ -28,7 +28,7 @@
 
 ## Psuedocode
 
-    - Will change to MIPS at a later date
+    - Non MIPS example
 
 ```
 
@@ -44,5 +44,30 @@ loop:
     prev_error := error
     wait(dt)
     goto loop
+
+```
+
+    - MIPS first pass....have not checked
+
+```mips
+
+define prev_error 0
+define integral 0
+
+Main:
+sub error setpoint measured_value
+move proportional error
+add integral integral error
+mul integral * delta_time
+sub error error prev_error
+div derivative error delta_time
+mul output kp proportional
+add output output ki
+mul output output integral
+add output output kd
+mul output output derivative
+move prev_error error
+wait delta_time
+j Main
 
 ```
